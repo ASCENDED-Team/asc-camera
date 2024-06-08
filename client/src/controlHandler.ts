@@ -1,5 +1,6 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
+import { ASC_CameraConfig } from './config.js';
 
 export let mimicCamera: number = undefined;
 
@@ -32,7 +33,7 @@ const mimicControl = {
     disable() {
         if (mimicCamera) {
             native.setCamActive(mimicCamera, false);
-            native.renderScriptCams(false, false, 0, true, false, 0);
+            native.renderScriptCams(false, ASC_CameraConfig.ease, ASC_CameraConfig.easeTime, true, false, 0);
             native.destroyCam(mimicCamera, false);
             alt.clearEveryTick(mimicTick);
 
@@ -69,7 +70,7 @@ const mimicControl = {
         );
 
         native.setCamActive(mimicCamera, true);
-        native.renderScriptCams(true, false, 0, true, false, 0);
+        native.renderScriptCams(true, ASC_CameraConfig.ease, ASC_CameraConfig.easeTime, true, false, 0);
     },
 };
 
