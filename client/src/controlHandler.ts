@@ -48,12 +48,21 @@ const mimicControl = {
             const gameplayCamPos = native.getGameplayCamCoord();
             const gameplayCamRot = native.getGameplayCamRot(2);
 
+            const { forward, right, up } = getDirectionVectors(gameplayCamRot);
+
+            const worldOffset = {
+                x: offset.x * right.x + offset.y * forward.x + offset.z * up.x,
+                y: offset.x * right.y + offset.y * forward.y + offset.z * up.y,
+                z: offset.x * right.z + offset.y * forward.z + offset.z * up.z,
+            };
+
             native.setCamCoord(
                 mimicCamera,
-                gameplayCamPos.x + offset.x,
-                gameplayCamPos.y + offset.y,
-                gameplayCamPos.z + offset.z,
+                gameplayCamPos.x + worldOffset.x,
+                gameplayCamPos.y + worldOffset.y,
+                gameplayCamPos.z + worldOffset.z,
             );
+
             native.setCamRot(mimicCamera, gameplayCamRot.x, gameplayCamRot.y, gameplayCamRot.z, 2);
 
             if (ASC_CameraConfig.focusOnPlayer) {
@@ -149,3 +158,40 @@ export const cameraControl = {
         CamInterval = undefined;
     },
 };
+
+function degreesToRadians(degrees) {
+    return degrees * (Math.PI / 180);
+}
+
+function getDirectionVectors(rotation) {
+    const pitch = degreesToRadians(rotation.x);
+    const yaw = degreesToRadians(rotation.z);
+    const roll = degreesToRadians(rotation.y);
+
+    const cosPitch = Math.cos(pitch);
+    const sinPitch = Math.sin(pitch);
+    const cosYaw = Math.cos(yaw);
+    const sinYaw = Math.sin(yaw);
+    const cosRoll = Math.cos(roll);
+    const sinRoll = Math.sin(roll);
+
+    const forward = {
+        x: cosPitch * cosYaw,
+        y: cosPitch * sinYaw,
+        z: sinPitch,
+    };
+
+    const right = {
+        x: cosYaw * sinRoll * sinPitch - cosRoll * sinYaw,
+        y: cosYaw * cosRoll + sinYaw * sinRoll * sinPitch,
+        z: -cosPitch * sinRoll,
+    };
+
+    const up = {
+        x: cosYaw * sinPitch * sinRoll + cosRoll * sinYaw,
+        y: sinYaw * sinPitch * sinRoll - cosRoll * cosYaw,
+        z: cosPitch * cosRoll,
+    };
+
+    return { forward, right, up };
+}
