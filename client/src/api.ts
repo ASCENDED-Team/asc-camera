@@ -12,11 +12,11 @@ export function useCameraAPI() {
     function cameraMoveEnd() {
         onCameraMoveEnd();
     }
-    function cameraMoveIn() {
-        cameraZoomIn();
+    function cameraMoveIn(value: number = 1) {
+        cameraZoomIn(value);
     }
-    function cameraMoveOut() {
-        cameraZoomOut();
+    function cameraMoveOut(value: number = 1) {
+        cameraZoomOut(value);
     }
 
     return {

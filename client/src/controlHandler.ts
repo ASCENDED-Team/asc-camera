@@ -44,11 +44,28 @@ const mimicControl = {
 
     updateMimicCamera() {
         if (mimicCamera) {
+            const offset = ASC_CameraConfig.cameraOffset;
             const gameplayCamPos = native.getGameplayCamCoord();
             const gameplayCamRot = native.getGameplayCamRot(2);
 
-            native.setCamCoord(mimicCamera, gameplayCamPos.x, gameplayCamPos.y, gameplayCamPos.z - 1.25);
+            native.setCamCoord(
+                mimicCamera,
+                gameplayCamPos.x + offset.x,
+                gameplayCamPos.y + offset.y,
+                gameplayCamPos.z + offset.z,
+            );
             native.setCamRot(mimicCamera, gameplayCamRot.x, gameplayCamRot.y, gameplayCamRot.z, 2);
+
+            if (ASC_CameraConfig.focusOnPlayer) {
+                native.pointCamAtEntity(mimicCamera, alt.Player.local, 0, 0, 0, true);
+            }
+
+            if (ASC_CameraConfig.focusOnVehicle) {
+                const vehicle = alt.Player.local.vehicle;
+                if (vehicle) {
+                    native.pointCamAtEntity(mimicCamera, vehicle.scriptID, 0, 0, 0, true);
+                }
+            }
         }
     },
 

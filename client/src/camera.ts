@@ -1,7 +1,7 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
 
-import { cameraControl, mimicCamera } from "./controlHandler.js";
+import { cameraControl, mimicCamera } from './controlHandler.js';
 
 const originalFov = native.getGameplayCamFov();
 let currentFov = originalFov;
@@ -14,12 +14,12 @@ export function onCameraMoveEnd() {
     cameraControl.disable();
 }
 
-export function cameraZoomIn() {
-    currentFov = currentFov - 1;
+export function cameraZoomIn(value: number = 1) {
+    currentFov = currentFov - value;
     native.setCamFov(mimicCamera, currentFov);
 }
 
-export function cameraZoomOut() {
-    currentFov = currentFov + 1;
+export function cameraZoomOut(value: number = 1) {
+    currentFov = currentFov + value;
     native.setCamFov(mimicCamera, currentFov);
 }
