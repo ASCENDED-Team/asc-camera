@@ -3,8 +3,8 @@ import { cameraZoomIn, cameraZoomOut, onCameraMoveEnd, onCameraMoveStart } from 
 import { movementControl } from './controlHandler.js';
 
 export function useCameraAPI() {
-    function onMovementControl() {
-        movementControl
+    function onMovementControl(state: boolean) {
+        movementControl[state ? 'enable' : 'disable']();
     }
     function cameraMoveStart() {
         onCameraMoveStart();
@@ -24,7 +24,7 @@ export function useCameraAPI() {
         cameraMoveEnd,
         cameraMoveIn,
         cameraMoveOut,
-        movementControl,
+        onMovementControl,
     };
 }
 
