@@ -12,6 +12,11 @@ const cameraOffset = {
     z: 0
 };
 
+const easeSettings = {
+    ease: false,
+    time: 1500,
+}
+
 export function focusOnPlayer() {
     native.pointCamAtEntity(mimicCamera, alt.Player.local, 0, 0, 0, true);
 }
@@ -33,6 +38,19 @@ export function setCameraOffset(x: number, y: number, z: number) {
 
 export function getCameraOffset() {
     return { ...cameraOffset }
+}
+
+export function cameraEase(enabled: boolean, time: number) {
+    easeSettings.ease = enabled;
+
+    easeSettings.time = time;
+
+    console.log(``)
+}
+
+export function getEase() {
+    console.log(easeSettings.ease + " " + easeSettings.time)
+    return { ...easeSettings };
 }
 
 export function onCameraMoveStart() {

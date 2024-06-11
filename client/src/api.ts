@@ -1,5 +1,5 @@
 import { useClientApi } from '@Client/api/index.js';
-import { cameraZoomIn, cameraZoomOut, focusOnPlayer, focusOnVehicle, onCameraMoveEnd, onCameraMoveStart, setCameraOffset } from './camera.js';
+import { cameraEase, cameraZoomIn, cameraZoomOut, focusOnPlayer, focusOnVehicle, getEase, onCameraMoveEnd, onCameraMoveStart, setCameraOffset } from './camera.js';
 import { movementControl } from './controlHandler.js';
 
 export function useCameraAPI() {
@@ -11,8 +11,12 @@ export function useCameraAPI() {
         focusOnVehicle()
     }
 
+    function ease(enabled: boolean, time: number) {
+        cameraEase(enabled, time);
+    }
+
     function setOffset() {
-        setCameraOffset();
+        setCameraOffset(0, 0, 0);
     }
 
     function onMovementControl(state: boolean) {
@@ -39,6 +43,7 @@ export function useCameraAPI() {
         focusOnPlayer,
         focusOnVehicle,
         setCameraOffset,
+        ease,
         cameraMoveStart,
         cameraMoveEnd,
         cameraMoveIn,
