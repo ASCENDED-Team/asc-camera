@@ -44,12 +44,9 @@ export function cameraEase(enabled: boolean, time: number) {
     easeSettings.ease = enabled;
 
     easeSettings.time = time;
-
-    console.log(``)
 }
 
 export function getEase() {
-    console.log(easeSettings.ease + " " + easeSettings.time)
     return { ...easeSettings };
 }
 
