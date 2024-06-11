@@ -1,6 +1,5 @@
 import * as alt from 'alt-client';
 import * as native from 'natives';
-import { ASC_CameraConfig } from './config.js';
 import { focusOnPlayer, focusOnVehicle, getCameraOffset, getEase } from './camera.js';
 
 export let mimicCamera: number = undefined;
