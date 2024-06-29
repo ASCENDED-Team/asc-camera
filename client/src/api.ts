@@ -31,8 +31,8 @@ export function useCameraAPI() {
         cameraEase(enabled, time);
     }
 
-    function setOffset() {
-        setCameraOffset(0, 0, 0);
+    function setOffset(x = 0, y = 0, z = 0) {
+        setCameraOffset(x, y, z);
     }
 
     function onMovementControl(state: boolean) {
