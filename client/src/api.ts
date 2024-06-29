@@ -1,14 +1,30 @@
+import * as alt from 'alt-client';
+
 import { useClientApi } from '@Client/api/index.js';
-import { cameraEase, cameraZoomIn, cameraZoomOut, focusOnPlayer, focusOnVehicle, getEase, onCameraMoveEnd, onCameraMoveStart, setCameraOffset } from './camera.js';
+import {
+    cameraEase,
+    cameraZoomIn,
+    cameraZoomOut,
+    focusOnPlayer,
+    focusOnVehicle,
+    getEase,
+    onCameraMoveEnd,
+    onCameraMoveStart,
+    setCameraOffset,
+} from './camera.js';
 import { movementControl } from './controlHandler.js';
 
 export function useCameraAPI() {
     function focusPlayer() {
-        focusOnPlayer()
+        focusOnPlayer();
     }
 
-    function focusVehicle() {
-        focusOnVehicle()
+    function focusVehicle(vehicleReiceved?: alt.Vehicle) {
+        if (vehicleReiceved) {
+            focusOnVehicle(vehicleReiceved);
+        } else {
+            focusOnVehicle();
+        }
     }
 
     function ease(enabled: boolean, time: number) {
@@ -40,9 +56,9 @@ export function useCameraAPI() {
     }
 
     return {
-        focusOnPlayer,
-        focusOnVehicle,
-        setCameraOffset,
+        focusPlayer,
+        focusVehicle,
+        setOffset,
         ease,
         cameraMoveStart,
         cameraMoveEnd,

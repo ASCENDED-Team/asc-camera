@@ -9,23 +9,27 @@ let currentFov = originalFov;
 const cameraOffset = {
     x: 0,
     y: 0,
-    z: 0
+    z: 0,
 };
 
 const easeSettings = {
     ease: false,
     time: 1500,
-}
+};
 
 export function focusOnPlayer() {
     native.pointCamAtEntity(mimicCamera, alt.Player.local, 0, 0, 0, true);
 }
 
-export function focusOnVehicle() {
-    const vehicle = alt.Player.local.vehicle;
-    if (!vehicle) return;
+export function focusOnVehicle(vehicleReceived?: alt.Vehicle) {
+    if (!vehicleReceived) {
+        const vehicle = alt.Player.local.vehicle;
+        if (!vehicle) return;
 
-    native.pointCamAtEntity(mimicCamera, vehicle.scriptID, 0, 0, 0, true);
+        native.pointCamAtEntity(mimicCamera, vehicle.scriptID, 0, 0, 0, true);
+    } else {
+        native.pointCamAtEntity(mimicCamera, vehicleReceived.scriptID, 0, 0, 0, true);
+    }
 }
 
 export function setCameraOffset(x: number, y: number, z: number) {
@@ -37,7 +41,7 @@ export function setCameraOffset(x: number, y: number, z: number) {
 }
 
 export function getCameraOffset() {
-    return { ...cameraOffset }
+    return { ...cameraOffset };
 }
 
 export function cameraEase(enabled: boolean, time: number) {
