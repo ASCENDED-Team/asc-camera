@@ -2,7 +2,6 @@ import * as alt from 'alt-client';
 import * as native from 'natives';
 
 import { cameraControl, mimicCamera } from './controlHandler.js';
-import { LocalVehicle } from 'alt-client';
 
 const originalFov = native.getGameplayCamFov();
 let currentFov = originalFov;
@@ -22,7 +21,7 @@ export function focusOnPlayer() {
     native.pointCamAtEntity(mimicCamera, alt.Player.local, 0, 0, 0, true);
 }
 
-export function focusOnVehicle(vehicleReceived?: alt.Vehicle | LocalVehicle) {
+export function focusOnVehicle(vehicleReceived?: alt.Vehicle | alt.LocalVehicle) {
     if (!vehicleReceived) {
         const vehicle = alt.Player.local.vehicle;
         if (!vehicle) return;
