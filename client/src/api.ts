@@ -1,5 +1,5 @@
 import * as alt from 'alt-client';
-
+import * as native from 'natives';
 import { useClientApi } from '@Client/api/index.js';
 import {
     cameraEase,
@@ -7,7 +7,6 @@ import {
     cameraZoomOut,
     focusOnPlayer,
     focusOnVehicle,
-    getEase,
     onCameraMoveEnd,
     onCameraMoveStart,
     setCameraOffset,

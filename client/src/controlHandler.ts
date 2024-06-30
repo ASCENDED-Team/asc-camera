@@ -64,9 +64,6 @@ const mimicControl = {
             );
 
             native.setCamRot(mimicCamera, gameplayCamRot.x, gameplayCamRot.y, gameplayCamRot.z, 2);
-
-            focusOnPlayer();
-            focusOnVehicle();
         }
     },
 
