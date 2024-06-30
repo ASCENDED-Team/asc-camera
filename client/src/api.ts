@@ -12,13 +12,14 @@ import {
     setCameraOffset,
 } from './camera.js';
 import { movementControl } from './controlHandler.js';
+import { LocalVehicle } from 'alt-client';
 
 export function useCameraAPI() {
     function focusPlayer() {
         focusOnPlayer();
     }
 
-    function focusVehicle(vehicleReiceved?: alt.Vehicle) {
+    function focusVehicle(vehicleReiceved?: alt.Vehicle | LocalVehicle) {
         if (vehicleReiceved) {
             focusOnVehicle(vehicleReiceved);
         } else {
